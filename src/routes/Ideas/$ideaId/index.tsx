@@ -4,7 +4,11 @@ import { createFileRoute } from '@tanstack/react-router'
 export const Route = createFileRoute('/Ideas/$ideaId/')({
   component: IdeaDetailsPage,
   loader: async({params})=>{
-    return params.ideaId
+    const res = await fetch(`/api/ideas/${params.ideaId}`)
+
+    if(!res.ok) throw new Error("Failed to fetch ideas")
+
+    return res.json()
   }
 })
 
