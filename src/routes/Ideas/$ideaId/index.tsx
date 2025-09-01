@@ -1,15 +1,21 @@
 import IdeaDetailsPage from '@/screens/ideas/ideaDetails'
 import { createFileRoute } from '@tanstack/react-router'
+import api from '@/lib/axios'
+import { queryOptions } from '@tanstack/react-query'
+
+const fetchIdeas = async(ideaId:string) => {
+    const res = await api.get(`/ideas/${ideaId}`)
+    return res.data
+}
+
+export const ideaQueryOptons = (ideaId:string) => queryOptions({
+    queryKey:['idea', ideaId],
+    queryFn: () => fetchIdeas(ideaId)
+})
 
 export const Route = createFileRoute('/Ideas/$ideaId/')({
   component: IdeaDetailsPage,
-  loader: async({params})=>{
-    const res = await fetch(`/api/ideas/${params.ideaId}`)
-
-    if(!res.ok) throw new Error("Failed to fetch ideas")
-
-    return res.json()
-  }
+  loader: ({params, context: {queryClient}})=> queryClient.ensureQueryData(ideaQueryOptons(params.ideaId))
 })
 
 

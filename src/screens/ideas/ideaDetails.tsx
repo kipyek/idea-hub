@@ -1,11 +1,12 @@
-import { Route } from "@/routes/Ideas/$ideaId";
+import { ideaQueryOptons, Route } from "@/routes/Ideas/$ideaId";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 export default function IdeaDetailsPage() {
-    const {title} = Route.useLoaderData();
-    console.log(title)
+    const {ideaId} = Route.useParams();
+    const {data} = useSuspenseQuery(ideaQueryOptons(ideaId));
   return (
     <div>
-      My idea number {title}
+      My idea number {data.description}
     </div>
   )
 }
