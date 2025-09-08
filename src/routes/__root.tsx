@@ -2,6 +2,8 @@ import { HeadContent, Outlet, createRootRouteWithContext } from '@tanstack/react
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanstackDevtools } from '@tanstack/react-devtools'
 import { QueryClient } from '@tanstack/react-query'
+import Header from '@/screens/components/header'
+import Notfound from '@/screens/components/Notfound'
 
 type RouterContextProps = {
   queryClient: QueryClient
@@ -22,6 +24,7 @@ export const Route = createRootRouteWithContext<RouterContextProps>()({
   component: () => (
     <>
     <HeadContent/>
+    <Header/>
       <Outlet />
       <TanstackDevtools
         config={{
@@ -36,4 +39,5 @@ export const Route = createRootRouteWithContext<RouterContextProps>()({
       />
     </>
   ),
+  notFoundComponent: Notfound,
 })
