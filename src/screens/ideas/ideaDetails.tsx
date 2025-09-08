@@ -7,7 +7,7 @@ export default function IdeaDetailsPage() {
   const { data } = useSuspenseQuery(ideaQueryOptons(ideaId));
   return (
     <div className="p-8 max-w-4xl justify-center items-center mx-auto">
-      <div className="bg-gray-300 m-2 rounded-lg p-4 shadow-lg">
+      <div className="bg-gray-100 m-2 rounded-lg p-4 shadow-md">
       <Link to="/Ideas" className="text-blue-500 underline block cursor-pointer">
       Back to Ideas
       </Link>
